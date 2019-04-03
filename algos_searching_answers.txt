@@ -1,10 +1,16 @@
 Short Answer
 1. Searing a playlist alphabetical by scrolling down until you find the song you are looking for
+
 2. Searching the same playlist by clicking on the index on the right that allows you to jump to a certain letter is kind of like binary search as a first step. You cut the list to be searched to anything after the first song in the letter you choose. Then you do a linear search from then on
+
 3. 7
-4. There are 26 letters so would have to jump around to -> 13, 6, 9, 7
-5. Binary isn’t good for unsorted, so I’d choose linear.
-6. Binary is good for sorted, much more efficiecnt than linear, so I’d go for binary.
+
+4. Given the same sorted abcdefg collection, it would take 3 steps to find g with binary search. The algo would jump to d, then, f, then find g
+Note: my bad, I thought we were talking about the whole alphabet in my previous answer!\
+
+5. Binary isn’t good for unsorted, so I’d choose linear. The reason it isn't good is because once it gets to the midpoint, what do you tell it to do next? Go up to the second half? Since its unsorted it won't necessarily make sense, there will be bigger and smaller items there. Go down? Same problem.
+
+6. Binary is good for sorted, much more efficient than linear, so I’d go for binary. Since its sorted, the algorithm knows where to go from the midpoint, and with each step cuts down 1/2 the dataset, which cuts down many iterations every time you can eliminate a big swatch of space to search.
 
 Programming assignment
 1.
@@ -21,10 +27,15 @@ function binarySearch (dictionary, word) {
       hi = mid;
     } else if (dictionary[mid] < word) {
       lo = mid;
-    }
+    } else {return mid;}
   }
+  return "Word not found"
 }
 
+console.log(binarySearch(['aaaa', 'ab', 'albatross', 'dick', 'err', 'zzzz'], 'zzzz'));
+// Word not found
+console.log(binarySearch(['aaaa', 'ab', 'albatross', 'dick', 'err', 'zzzz'], 'asdasfd'));
+//Word not found
 
 var wordTest = "d";
 var dictionaryTest = ["a","b","c","d",
@@ -38,6 +49,7 @@ var dictionaryTest = ["a","b","c","d",
 
 var result = binarySearch(dictionaryTest, wordTest);
 console.log(result);
+// d is at index 3
 
 /* The reason the word comparison works is
 JavaScript uses the so-called “dictionary”
