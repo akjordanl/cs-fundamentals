@@ -1,0 +1,61 @@
+1. Recursion is a repeated operation whereby the function calls itself as a method of repetition. Iteration is repeated operation where an operation is performed a defined number of times. The similarity is they both allow for an operation to be repeated as needed. The difference is recursion does it by calling itself (which is elegant but a little abstract) and iteration does it by defining the operation and the number of times an operation should be repeated.
+
+2. Generating Fibonacci Numbers, Rank Search, Binary search, finding the Greatest Common Divisor, finding Factorial of a Number
+
+3. Use recursion when it makes it much simpler to write an algorithm than iteration, and when you know the base case will be met in a reasonable amount of time. Don't use recursion when iteration is just as easy or when the base case can take too long to  meet (or never be met!).
+
+4.
+a. What is similar:
+- In all cases, the point is to repeat an operation. So that is similar.
+- At least for me, in all cases, the iterative solution is easier for me to follow and understand. The recursive one always strikes me as elegant but also abstract and "magical".
+- At least in these three cases, the recursive solution is not a great deal simpler (i.e., much less code) than the iterative one.
+b. What is different:
+- In some cases, the recursive function seems to explode faster than in others. For example, in the Fibonacci sequence, given so much branching, the recursion get complex and resource intensive pretty fast. Even though its a more elegant translation of the Fibonacci concept.
+- Finally, what's always different between iteration and recursion is whether you need to think of a "base case" (in recursion) vs. the space the function should iterate over (iteration).
+
+5.
+/*
+Given a multi-dimensional collection (such as an array)
+where the number of dimensions is unknown,
+write a recursive algorithm to count the number of items
+in the entire collection.
+*/
+
+var testCol = [[1,2],[3,4,5,6,7],[8,9,10],[1,2,3,4,5],[,1,2,3],[1,2],[1],[,1,2,3,4,5,6,7,8,9]];
+
+function arrayRecursiveCount (collection, nStart) {
+  if (!collection[nStart]) {
+    return 0;} else {
+      return collection[nStart].length + arrayRecursiveCount(collection, nStart+1);
+    }
+}
+
+console.log(arrayRecursiveCount(testCol,0));
+// 32
+
+6.
+/*
+A palindrome is a word or phrase whose spelling is the
+same either direction (e.g., racecar). Write a recursive
+algorithm to determine if a given word or phrase is a palindrome.
+*/
+
+function checkPalindrome (word) {
+  if ( word.length <= 1 ) {
+    return true;
+  }
+  else if ( word[0] === word[word.length - 1] ) {
+    return checkPalindrome( word.slice( 1, word.length - 1 ));
+  } else {return false;}
+}
+
+console.log(checkPalindrome("racecar"));
+// true
+console.log(checkPalindrome("andrew"));
+// false
+console.log(checkPalindrome("redder"));
+// true
+console.log(checkPalindrome("bloc"));
+// false
+
+7. This is because by clicking on "did you mean: recursion" you are calling the same function that searches for recursion, which is recursion.
