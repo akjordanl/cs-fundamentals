@@ -1,0 +1,50 @@
+Short Answer
+1. To think through the logic of the program without having to think through the syntax of a particular languaje
+2. The computer would not understand it.
+
+Programming Assignment
+1. 
+INPUT a number
+INPUT another number
+IF number > another number
+  PRINT "Number is greater than another number"
+ELSE IF number < another number
+  PRINT "Another number is greater than number"
+ELSE IF number = another number
+  PRINT "Numbers are the same"
+END IF
+
+2. 
+FUNCTION oneToOneHundred
+SET n = 1
+WHILE n <= 100
+  Print n
+  n = n + 1
+END WHILE
+
+3. 
+INPUT Phonebook
+INPUT Entry
+FUNCTION searchPhonebookEntry
+SET n = 0
+FOR n <= Phonebook LENGTH
+  IF Phonebook[n] != Entry THEN
+    n = n+1
+  ELSE IF Phonebook[n] = Entry THEN
+    PRINT "Entry at n"
+END FOR
+  PRINT "Entry not found"
+
+4.
+function searchPhonebookEntry (Phonebook, Entry) {
+  for (i = 0; i < Phonebook.length; i++) {
+    if (Phonebook[i] === Entry) {
+      return "Entry at i";
+    }
+  return "Entry not found";
+  } 
+}
+
+Note: in JavaScript I don't need to set the n=0 like my
+pseudocode does because the for function already does
+that for me when defining i

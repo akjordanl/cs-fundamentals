@@ -1,0 +1,38 @@
+Short answer
+1. A stack draws from the top, meaning the last element added is drawn first.
+A queue draws from the front, meaning the first element added is drawn first.
+
+2. The similarity is both respect the order in which things are added.
+Keeping elements organized relative to each other.
+
+3. For UNDO and REDO I'd use a queue. One for each. In both cases the action we want
+to remember first is the last action that happened. 
+
+Programming question
+1. Implement queue and dequeue in a class
+class Queue {
+  constructor(queue, element) {
+    this.queue = queue;
+    this.element = element;
+  }
+  
+  // Methods
+  enqueue() {
+    return this.queue.push(element);
+  }
+
+  dequeue() {
+    var temp = this.queue[0];
+    this.queue.slice(0,1);
+    return queue;
+  }
+}
+
+var list = ["left","right","down"];
+
+var enqueueTest = Queue(list, "up").enqueue();
+
+var dequeueTest = Queue(list).dequeue();
+
+
+console.log(list, enqueueTest, dequeueTest);

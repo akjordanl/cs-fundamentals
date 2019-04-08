@@ -1,0 +1,61 @@
+1. 
+a.
+var queueTest =  ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+
+b.
+function insertPeople(queue, newToQueue) {
+  queue.push(newToQueue);
+}
+
+insertPeople(queueTest, "Mary");
+
+c.
+function findPerson(queue, target) {
+  for(i=0; i<queue.length; i++) {
+    if(queue[i] === target) {
+      return i;
+    }
+  }
+  return "Not found";
+}
+
+d.
+// console.log(findPerson(queueTest, "Emily"));
+// This should return Not found and it does
+
+e.
+function cutInFront(queue, nameToCut, nameCutting) {
+  var indexToCut = findPerson(queue, nameToCut);
+  queue.splice(indexToCut, 0, nameCutting);
+}
+
+cutInFront(queueTest, "Ava", "Melissa");
+
+// console.log(queueTest);
+// ["Vivian", "Melissa", "Ava", "Josh", "Patrick", "Mike", "Mary"]
+
+//f
+function removeFromQueue(queue, nameToRemove) {
+  var indexToRemove = findPerson(queue, nameToRemove);
+  queue.splice(indexToRemove, 1);
+}
+
+removeFromQueue(queueTest, "Patrick");
+
+// console.log(queueTest);
+// ["Vivian", "Melissa", "Ava", "Josh", "Mike", "Mary"]
+
+
+
+2. My wifes blood glucose readings. They come from her constant
+glucose monitor that sends readings from the sensor to the device
+every 5 mins. It becomes an array of readings, and every new reading
+is appended to the end of the array.
+
+3. The data structure is quite more complicated and useful than a
+simple array. It is indexed by timestamps, and contains multiple types
+of data measured every 5 mins. You can ask for specific readings, 
+averages over time, etc. In terms of access, it is available through
+the device, my wife's phone, and a company called TidePool has unlocked
+the data and allows my wife to upload it to a website, where I can
+access it for analysis via an API.
