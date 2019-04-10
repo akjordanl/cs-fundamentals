@@ -1,9 +1,9 @@
 Short Answer
-1. To think through the logic of the program without having to think through the syntax of a particular languaje
+1. To think through the logic of the program without having to think through the syntax of a particular language
 2. The computer would not understand it.
 
 Programming Assignment
-1. 
+1.
 INPUT a number
 INPUT another number
 IF number > another number
@@ -14,7 +14,7 @@ ELSE IF number = another number
   PRINT "Numbers are the same"
 END IF
 
-2. 
+2.
 FUNCTION oneToOneHundred
 SET n = 1
 WHILE n <= 100
@@ -22,7 +22,7 @@ WHILE n <= 100
   n = n + 1
 END WHILE
 
-3. 
+3.
 INPUT Phonebook
 INPUT Entry
 FUNCTION searchPhonebookEntry
@@ -42,7 +42,7 @@ function searchPhonebookEntry (Phonebook, Entry) {
       return "Entry at i";
     }
   return "Entry not found";
-  } 
+  }
 }
 
 Note: in JavaScript I don't need to set the n=0 like my

@@ -5,34 +5,152 @@ A queue draws from the front, meaning the first element added is drawn first.
 2. The similarity is both respect the order in which things are added.
 Keeping elements organized relative to each other.
 
-3. For UNDO and REDO I'd use a queue. One for each. In both cases the action we want
-to remember first is the last action that happened. 
+3. For UNDO and REDO I'd use a stack. One for each. In both cases the action we want
+to remember first is the last action that happened.
 
-Programming question
-1. Implement queue and dequeue in a class
-class Queue {
-  constructor(queue, element) {
-    this.queue = queue;
-    this.element = element;
+Programming questions
+1.
+/*
+Given a string, reverse it using a stack. For example,
+the string "Bloc!" should be converted to "!colB".
+*/
+
+function reverseString(word) {
+  var stack = [];
+  var wordSplit = word.split('');
+  console.log(wordSplit);
+  for (i=0; i < wordSplit.length; i++) {
+    stack.unshift(wordSplit[i]);
   }
-  
-  // Methods
-  enqueue() {
-    return this.queue.push(element);
+  return stack.join('');
+}
+
+console.log(reverseString("Bloc!"));
+// "!colB"
+
+
+2.
+/*
+Implement the pop method of a Stack using one queue.
+Make a FIFO data structure mirror the functionality
+of a LIFO data structure. Since the internal list is
+not the same as defined in the checkpoint, it may
+help to rewrite the pseudocode first.
+*/
+/* Steps
+Define the Stack Class
+Create a method that "pops" off the last element of the stack
+- Take an array
+- Save every element of that array, except the last one, into a new array
+- Save the new array as the original array
+- Return the last element that was removed
+*/
+
+class Stack {
+
+  // constructor
+  constructor (newElement) {
+    this.stack = [];
+    this.newElement = newElement;
   }
 
-  dequeue() {
-    var temp = this.queue[0];
-    this.queue.slice(0,1);
-    return queue;
+  // methods
+
+  addToStack(newElement) {
+    this.stack.push(newElement);
+    return this.stack;
+  }
+
+  pop() {
+    var newStack = [];
+    var poppedElement = [];
+    for (i=0; i<this.stack.length; i++) {
+      if (this.stack.length === 0) {
+        return "Stack is empty";
+      }
+      else if (this.stack[i] === this.stack[this.stack.length - 1]) {
+        poppedElement = this.stack[i];
+      }
+      else {
+        newStack.push(this.stack[i]);
+      }
+    }
+    this.stack = newStack;
+    return poppedElement;
   }
 }
 
-var list = ["left","right","down"];
+testStack = new Stack;
+testStack.addToStack("Up");
+testStack.addToStack("Down");
+testStack.addToStack("Left");
+testStack.addToStack("Right");
+console.log(testStack.stack);
+// ["Up", "Down", "Left", "Right"]
+console.log(testStack.pop());
+// "Right"
+console.log(testStack.stack);
+// "Right"
 
-var enqueueTest = Queue(list, "up").enqueue();
 
-var dequeueTest = Queue(list).dequeue();
+3.
+/*
+Implement queue and dequeue in a class
+*/
+
+class Queue {
+  constructor(queue, element) {
+    this.list = []
+  }
+
+  // Methods
+  enqueue(element) {
+    return this.list.push(element);
+  }
+
+  dequeue() {
+    if (this.list.length === 0) {
+      return "List is empty";
+    } else {
+      var temp = this.list[0];
+      this.list.shift();
+      return this.list;
+    }
+
+  }
+}
 
 
-console.log(list, enqueueTest, dequeueTest);
+var queue = new Queue();
+
+queue.enqueue("left");
+console.log(queue);
+/*
+[object Object] {
+  list: ["left"]
+}
+*/
+
+queue.enqueue("right");
+console.log(queue);
+/*
+[object Object] {
+  list: ["left", "right"]
+}
+*/
+
+queue.enqueue("up");
+console.log(queue);
+/*
+[object Object] {
+  list: ["left", "right", "up"]
+}
+*/
+
+queue.dequeue();
+console.log(queue);
+/*
+[object Object] {
+  list: ["right", "up"]
+}
+*/
