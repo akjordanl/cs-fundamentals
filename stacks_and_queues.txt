@@ -64,11 +64,11 @@ class Stack {
   pop() {
     var newStack = [];
     var poppedElement = [];
-    for (i=0; i<this.stack.length; i++) {
+    for (var i=0; i<this.stack.length; i++) {
       if (this.stack.length === 0) {
         return "Stack is empty";
       }
-      else if (this.stack[i] === this.stack[this.stack.length - 1]) {
+      else if (i === this.stack.length - 1) {
         poppedElement = this.stack[i];
       }
       else {
@@ -93,6 +93,7 @@ console.log(testStack.stack);
 // "Right"
 
 
+
 3.
 /*
 Implement queue and dequeue in a class
@@ -114,7 +115,7 @@ class Queue {
     } else {
       var temp = this.list[0];
       this.list.shift();
-      return this.list;
+      return temp;
     }
 
   }
@@ -147,10 +148,13 @@ console.log(queue);
 }
 */
 
-queue.dequeue();
+
+
+console.log(queue.dequeue());
+// "left"
+
 console.log(queue);
 /*
 [object Object] {
   list: ["right", "up"]
-}
-*/
+  
