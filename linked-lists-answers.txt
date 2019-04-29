@@ -1,0 +1,122 @@
+Short answers
+1. What are some pros and cons of using linked lists instead of arrays?
+Pros:
+* Linked lists scale better because they don't need consecutive units of
+memory storage. Meaning for massive arrays, the operating system doesn't
+have to re-arrange physical memory
+Cons:
+* Linked lists are less efficient to search, since elements reside can reside
+in multiple places and have to be accessed sequentially (one element contains
+the reference to the next)
+
+2. Come up with a real world example of a linked list.
+A mambo train. One person is connected to the person in front. If people are
+coming through the a doorway, you have to sequentially see who is in the
+mambo line. Also a standard train where wagons are hitched one after the other.
+
+Programming questions
+1.
+a. Explanation of bug: the pseudocode is missing a WHILE statement to iterative
+through the nodes until it finds a node where node.next is null.
+b. Implementation: see code below
+
+For Programming questions 1,2,3, see code below for the implementation and
+the three methods:
+
+/*
+3. Given an unsorted singly linked list, reverse it.
+Example
+Input: a -> b -> c -> d
+Output: d -> c -> b -> a
+*/
+
+
+// Create Node class
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+  }
+}
+
+// Linked List class
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+  // methods
+  push (element) {
+    newNode = new Node (element);
+    if (!this.head) {
+      this.head = newNode;
+    }
+    else {
+      currentNode = this.head;
+      while(currentNode.next != null) {
+        currentNode = currentNode.next;
+      }
+      currentNode.next = newNode;
+    }
+  }
+
+  print() {
+    if(!this.head) {
+      console.log("Cant find head");
+    }
+    else {
+      currentNode = this.head;
+      while (currentNode != null) {
+        console.log(currentNode.data);
+        // console.log(currentNode);
+        currentNode = currentNode.next;
+      }
+    }
+  }
+
+  deDuplicate () {
+    var anchor = this.head;
+    while (anchor != null) {
+      var valToCheck = anchor;
+      while (valToCheck.next != null) {
+
+        if(anchor.data === valToCheck.next.data) {
+          valToCheck.next = valToCheck.next.next;
+        }
+        else {
+          valToCheck = valToCheck.next;
+        }
+      }
+     anchor = anchor.next;
+    }
+  }
+
+  reverse () {
+    var prev = null;
+    var current = this.head;
+    var next = null;
+    while (current) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+    this.head = prev;
+  }
+}
+
+//Add Node
+console.log("create linked list");
+testList = new LinkedList();
+testList.push(1);
+testList.push(2);
+testList.push(3);
+testList.push(1);
+testList.push(2);
+testList.push(3);
+testList.print();
+console.log("check linked list after deduplication");
+testList.deDuplicate();
+testList.print();
+console.log("reverse");
+testList.reverse();
+testList.print()
