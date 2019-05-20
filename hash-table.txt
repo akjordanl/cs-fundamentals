@@ -1,0 +1,204 @@
+1. A hash table is a data structure. It does a few things. It stores a value that is linked to a key - that key is used to organize, store, and retrieve the value attached to it. The key is special though. They key goes through a special hashing function that turns it into a numeric value and places it in a specific place within a known range. This way, it is easier to find the value by looking for the key in the known range.
+
+2. Hashing is the process of converting a key into a hash key. It is a function that takes the key, turns it into a unique numeric value that fits the hash function range, and returns that value which becomes the hash key.
+
+3. A hash table stored key value pairs where the key has been hashed into a unique hash key. The hash key becomes easy to search within the hash range and can be used to restrieve the value attached to it. The hash key can also be unhashed so it goes back to being the original key.
+
+4. Objects also store key value pairs, but the key in objects has not been hashed. Objects can therefore be easier to interpret with the human eye, but harder/less efficient to search and organize.
+
+5a. Small enough dataset to store in an object
+5b. Small enough to store in an object and also would rather search name than hash key
+5c. If its big enough, a hash table
+5d. If I'm also maintaining the overall library index, then a hash table, cause thats a lot to store. If its just an individual's books checked out, probably an object. I can put it back into the hash table if he checks it back in.
+5e. Small enough to be an object
+
+Programming questions
+1.
+/* Create a hash table that allows a sales associate to
+enter a customer's name, address, and phone number into
+the system and look up customers using their phone
+numbers.*/
+
+// Create customer object
+
+class Customer {
+  constructor (name, address, phone) {
+    this.name = name;
+    this.address = address;
+    this.phone = phone;
+  }
+}
+
+var customerTest = new Customer('Andrew', 'NYC', '1111111');
+console.log(customerTest);
+
+
+
+class HashTable {
+  constructor () {
+    this.list = [];
+    this.listSize = 1000;
+  }
+
+  // methods
+  hashIt (phone) {
+    var hashCode = '';
+    for (i=0; i < phone.length; i++) {
+      hashCode = hashCode + phone[i].charCodeAt();
+      hashCode = hashCode % this.listSize;
+    }
+    return hashCode;
+  }
+
+  //
+  insert (object) {
+    var hashCode = this.hashIt(object.phone);
+    this.list[hashCode] = object;
+    return "inserted";
+  };
+
+  //
+  retrieve (phone) {
+    var hashCode = this.hashIt(phone);
+    return this.list[hashCode];
+  };
+}
+
+var hashTableTest = new HashTable();
+hashTableTest.insert(customerTest);
+var returned = hashTableTest.retrieve('1111111');
+console.log(returned);
+
+
+2.
+/* Create a hash table that allows a store
+owner to track their store's inventory and quantity.*/
+
+// Create customer object
+
+class Item {
+  constructor (sku, name, quantity) {
+    this.sku = sku;
+    this.name = name;
+    this.quantity = quantity;
+  }
+}
+
+var itemTest = new Item('1234', 'coke', 10);
+console.log(itemTest);
+
+
+
+class HashTable {
+  constructor () {
+    this.list = [];
+    this.listSize = 1000;
+  }
+
+  // methods
+  hashIt (sku) {
+    var hashCode = '';
+    for (i=0; i < sku.length; i++) {
+      hashCode = hashCode + sku[i].charCodeAt();
+      hashCode = hashCode % this.listSize;
+    }
+    return hashCode;
+  }
+
+  //
+  insert (object) {
+    var hashCode = this.hashIt(object.sku);
+    this.list[hashCode] = object;
+    return "Inserted";
+  };
+
+  //
+  retrieve (sku) {
+    var hashCode = this.hashIt(sku);
+    return this.list[hashCode];
+  };
+
+  //
+  add (sku, quantityAdd) {
+    var temp = this.retrieve(sku);
+    console.log(temp);
+    temp.quantity += quantityAdd;
+    this.insert(temp);
+    return quantityAdd + " added to sku: " + temp.sku;
+  }
+
+  //
+  sell (sku, quantitySold) {
+    var temp = this.retrieve(sku);
+    temp.quantity -= quantitySold;
+    this.insert(temp);
+    return quantitySold + " sold of sku: " + temp.sku;
+  }
+}
+
+var hashTableTest = new HashTable();
+hashTableTest.insert(itemTest);
+var returned = hashTableTest.retrieve('1234');
+console.log(returned);
+console.log(hashTableTest.add('1234', 10));
+console.log(hashTableTest.retrieve('1234'));
+console.log(hashTableTest.sell('1234', 5));
+console.log(hashTableTest.retrieve('1234'));
+
+
+3.
+/* Create a hash table that allows digital copies
+of newspapers to be entered and searched by publisher
+and publication date.*/
+
+// Create customer object
+
+class Publication {
+  constructor (publisher, pubDate, content) {
+    this.publisher = publisher;
+    this.pubDate = pubDate;
+    this.content = content;
+  }
+}
+
+var pubTest = new Publication('Wiley', '05/02/01', 'This is content');
+console.log(pubTest);
+
+
+
+class HashTable {
+  constructor () {
+    this.list = [];
+    this.listSize = 1000;
+  }
+
+  // methods
+  hashIt (publisher, pubDate) {
+    var id = publisher + pubDate;
+    var hashCode = '';
+    for (i=0; i < id.length; i++) {
+      hashCode = hashCode + id[i].charCodeAt();
+      hashCode = hashCode % this.listSize;
+    }
+    return hashCode;
+  }
+
+  //
+  insert (object) {
+    var id = object.publisher + object.pubDate;
+    var hashCode = this.hashIt(id);
+    this.list[hashCode] = object;
+  };
+
+  //
+  retrieve (publisher, pubDate) {
+    var id = publisher + pubDate;
+    var hashCode = this.hashIt(id);
+    return this.list[hashCode];
+  };
+}
+
+var hhTest = new HashTable();
+hhTest.insert(pubTest);
+var retrieved = hhTest.retrieve('Wiley', '05/02/01');
+console.log(retrieved);
